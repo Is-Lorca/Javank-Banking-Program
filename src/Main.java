@@ -1,14 +1,14 @@
 import java.io.IOException;
 import java.util.Scanner;
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws InterruptedException, IOException{
         //variables
-        String user, exitChoice;
+        String user;
         int password, userChoice;
         double balance = 0;
         boolean exit = false, passwordCheck = true;
 
-        Scanner scanner = new Scanner(System.in);
         //welcome message
         logo();
         System.out.print("Enter your name: ");
@@ -44,7 +44,7 @@ public class Main {
             cleanScreen();
             //ask the password if it is not to exit
             if (userChoice < 4 && userChoice != 0){
-                passwordCheck = passwordCheck(password, scanner);
+                passwordCheck = passwordCheck(password);
                 if (passwordCheck == false){
                     System.out.println("You were unable to verify your identity.\nPlease try again later.");
                     break;
@@ -53,17 +53,17 @@ public class Main {
             switch (userChoice) {
                 case 1 ->{
                     cleanScreen();
-                    showBalance(user, balance, scanner);
+                    showBalance(user, balance);
                 }
                 case 2 ->{
                     cleanScreen();                    
                     //deposit()
-                    balance = deposit(balance, scanner);
+                    balance = deposit(balance);
                 }
                 case 3 ->{
                     cleanScreen();
                     //withdraw()
-                    balance = withdraw(balance, scanner);    
+                    balance = withdraw(balance);    
                 }
                 case 4 ->{
                     //exit message
@@ -101,7 +101,7 @@ public class Main {
         System.out.println("==$== JAVANK ==$==");
         System.err.println();
     }
-    static boolean passwordCheck(int password, Scanner scanner){
+    static boolean passwordCheck(int password){
         int tries = 0;
         //ask for the password
         System.out.print("Please, enter your password: ");
@@ -124,7 +124,7 @@ public class Main {
         //if you can manage it, you can proceed
         return true;       
     }
-    static void showBalance(String name, double balance, Scanner scanner){
+    static void showBalance(String name, double balance){
         logo();
         System.out.println(name);
         System.out.printf("Your bank balance: $%,.2f", balance);
@@ -132,7 +132,7 @@ public class Main {
         System.out.println("Press any key and then Enter to return to menu");
         String returnMenu = scanner.next();
     }
-    static double deposit(double balance, Scanner scanner) throws InterruptedException, IOException{
+    static double deposit(double balance) throws InterruptedException, IOException{
         logo();
 
         System.out.println("Remember: You can only deposit amounts below 10,000");
@@ -165,7 +165,7 @@ public class Main {
             return balance;
         }
     }
-    static double withdraw(double balance, Scanner scanner) throws InterruptedException, IOException{
+    static double withdraw(double balance) throws InterruptedException, IOException{
         logo();
         System.out.println("Enter the amount you want to withdraw (no cents): ");
         int withdraw = scanner.nextInt();
