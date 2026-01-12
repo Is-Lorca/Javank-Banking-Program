@@ -43,7 +43,7 @@ public class Main {
             userChoice = scanner.nextInt();
             cleanScreen();
             //ask the password if it is not to exit
-            if (userChoice != 4){
+            if (userChoice < 4 && userChoice != 0){
                 passwordCheck = passwordCheck(password, scanner);
                 if (passwordCheck == false){
                     System.out.println("You were unable to verify your identity.\nPlease try again later.");
@@ -73,6 +73,11 @@ public class Main {
                     System.out.println("May the notes always be in your favor.\n");
                     Thread.sleep(1000);
                     exit = true;
+                }
+                default ->{
+                    System.out.println("Please enter a valid choice");
+                    System.out.println("Press any key and then Enter to return to menu");
+                    String returnMenu = scanner.next();
                 }
             }
         }while(!exit);
